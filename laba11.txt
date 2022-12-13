@@ -1,0 +1,47 @@
+Uses crt;
+var a:array[1..100,1..100] of integer;
+i,j,a1,a2, minus, n, m:integer;
+flag:boolean;
+BEGIN
+minus:= -1;
+clrscr;
+randomize;
+writeln('Input num of matrix rows and matrix columns');
+readln(m, n);
+ for i:=1 to n do
+ for j:=1 to m do
+   begin
+     a[i,j]:=random(10)*minus;   {Create matrix with random value}
+     minus:=minus*(-1);
+   end;
+ for i:=1 to n do
+   begin
+    for j:=1 to m do
+     write(a[i,j],' ');
+     writeln;
+   end;
+writeln;
+ for i:=1 to n do
+  begin
+    if ( a[i,1]>0 ) then      {Check sign of first column}
+    a1:=1
+  else
+    a1:=-1;
+    flag:=TRUE;
+    for j:=2 to m do
+      begin
+        if ( a[i,j]>0 ) then
+        a2:=1
+    else
+        a2:=-1;
+        if ( (a1*a2)>0 ) then
+          begin
+            flag:=FALSE;
+            continue;    {continue the process}
+          end;
+       a1:=a2;
+    end;
+  if ( flag ) then
+  writeln('str- ',i);
+  end;
+END.
